@@ -1,123 +1,477 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>खबर बिराटनगर | Khabar Biratnagar</title>
-  
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#a33e36">
   <link rel="apple-touch-icon" href="images/icon.png">
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
-      --primary-red: #a33e36;
-      --secondary-blue: #1a324b;
-      --accent-green-dark: #446f55;
-      --accent-green-light: #a6c08a;
-      --surface-light: #f8f9fa;
-      --card-bg-light: #ffffff;
-      --text-main: #1a324b;
-      --text-main-dark: #f0f6fc;
-      --border-color: #dee2e6;
-      --surface-dark: #0b0c10;
-      --card-bg-dark: #1f2833;
+      --red: #a33e36;
+      --red-dark: #7d2f28;
+      --navy: #1a324b;
+      --green-deep: #446f55;
+      --green-light: #a6c08a;
+      --surface: #f5f2ee;
+      --card: #ffffff;
+      --text: #1a324b;
+      --muted: #7a8a9a;
+      --border: #e5e0d8;
+      --dark-bg: #0e1117;
+      --dark-card: #181e27;
+      --dark-border: #2a3240;
     }
 
-    body { background: var(--surface-light); font-family: 'Outfit', sans-serif; transition: background 0.3s ease; color: var(--text-main); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html { scroll-behavior: smooth; }
 
-    .app-header { 
-        background: #fff; position: sticky; top: 0; z-index: 1040; padding: 0.5rem 0; 
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--primary-red); border-bottom: 2px solid var(--accent-green-dark);
+    body {
+      background: var(--surface);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+      overflow-x: hidden;
     }
+
+    /* ── HEADER ── */
+    .app-header {
+      position: sticky; top: 0; z-index: 1040;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+    .header-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--red) 60%, var(--green-deep) 100%);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 20px;
+      display: flex; align-items: stretch;
+      height: 64px;
+    }
+    .brand-area {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; flex: 0 0 auto;
+      padding-right: 28px;
+      border-right: 1px solid var(--border);
+    }
+    .brand-emblem {
+      width: 36px; height: 36px;
+      background: var(--red);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-emblem span {
+      font-family: 'Mukta', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: #fff;
+    }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-name {
+      font-family: 'Mukta', sans-serif;
+      font-weight: 800; font-size: 1.25rem;
+      color: var(--red); letter-spacing: -0.02em;
+    }
+    .brand-sub {
+      font-size: 0.65rem; font-weight: 500;
+      color: var(--muted); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .header-date {
+      display: flex; align-items: center;
+      padding: 0 20px;
+      font-size: 0.78rem; color: var(--muted);
+      font-weight: 500; letter-spacing: 0.04em;
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .header-actions {
+      display: flex; align-items: center;
+      gap: 6px; margin-left: auto;
+    }
+    .icon-btn {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: transparent; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text); font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover { background: var(--surface); border-color: var(--red); color: var(--red); }
+
+    /* ── TICKER ── */
+    .ticker-bar {
+      background: var(--navy);
+      color: #fff; overflow: hidden;
+      height: 36px; display: flex; align-items: center;
+    }
+    .ticker-label {
+      background: var(--red);
+      padding: 0 16px; height: 100%;
+      display: flex; align-items: center;
+      font-family: 'Mukta', sans-serif;
+      font-weight: 700; font-size: 0.8rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .ticker-track { flex: 1; overflow: hidden; position: relative; }
+    .ticker-inner {
+      display: flex; gap: 60px;
+      animation: ticker 30s linear infinite;
+      white-space: nowrap; padding-left: 40px;
+    }
+    .ticker-inner span { font-size: 0.82rem; opacity: 0.9; font-weight: 500; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── NAV CATEGORIES ── */
+    .cat-nav {
+      background: var(--card);
+      border-bottom: 2px solid var(--border);
+      position: sticky; top: 68px; z-index: 1030;
+    }
+    .cat-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; overflow-x: auto;
+      scrollbar-width: none; gap: 0;
+    }
+    .cat-nav-inner::-webkit-scrollbar { display: none; }
+    .cat-link {
+      padding: 14px 20px; font-size: 0.85rem; font-weight: 600;
+      color: var(--muted); cursor: pointer; white-space: nowrap;
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.06em;
+      background: none; border-left: none; border-right: none; border-top: none;
+    }
+    .cat-link:hover { color: var(--text); }
+    .cat-link.active { color: var(--red); border-bottom-color: var(--red); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    /* ── HERO SECTION ── */
+    .hero-section { margin-bottom: 40px; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 16px;
+    }
+    .section-label::after {
+      content: ''; display: block; width: 40px; height: 2px;
+      background: var(--green-light);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 2px; border-radius: 12px; overflow: hidden; }
+    .hero-main { position: relative; cursor: pointer; min-height: 420px; }
+    .hero-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .hero-main:hover img { transform: scale(1.03); }
+    .hero-main-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent 0%, rgba(10,15,25,0.92) 100%);
+      padding: 40px 28px 28px;
+    }
+    .hero-category-tag {
+      display: inline-block; background: var(--red);
+      color: #fff; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 3px; margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Mukta', sans-serif;
+      font-weight: 800; font-size: 1.6rem;
+      color: #fff; line-height: 1.3;
+    }
+    .hero-meta { margin-top: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.6); }
     
-    .brand-container { text-decoration: none; display: flex; align-items: center; gap: 10px; }
-    .brand-logo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #eee; }
-    .brand-name { font-family: 'Mukta', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--primary-red); margin: 0; }
+    .hero-side { display: flex; flex-direction: column; gap: 2px; }
+    .hero-side-item { position: relative; cursor: pointer; flex: 1; min-height: 136px; overflow: hidden; }
+    .hero-side-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .hero-side-item:hover img { transform: scale(1.05); }
+    .hero-side-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent 0%, rgba(10,15,25,0.88) 100%);
+      padding: 24px 16px 14px;
+    }
+    .hero-side-title {
+      font-family: 'Mukta', sans-serif;
+      font-weight: 700; font-size: 0.9rem;
+      color: #fff; line-height: 1.35;
+    }
 
-    .header-action-btn { cursor: pointer; font-size: 1.1rem; color: #444; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: #f1f3f5; border: none; }
+    /* ── DIVIDER ── */
+    .feed-divider {
+      display: flex; align-items: center; gap: 16px;
+      margin: 36px 0 24px;
+    }
+    .feed-divider-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--navy); white-space: nowrap;
+    }
+    .feed-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .feed-divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 
-    .category-bar { background: #fff; padding: 12px 0; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid var(--border-color); margin-bottom: 25px; scrollbar-width: none; }
-    .category-bar::-webkit-scrollbar { display: none; }
+    /* ── NEWS GRID ── */
+    #newsContainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .news-card {
+      background: var(--card);
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      cursor: pointer; transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(26,50,75,0.12); }
     
-    .cat-link { display: inline-block; padding: 6px 18px; margin-right: 8px; border-radius: 8px; background: #f1f3f5; color: var(--secondary-blue); text-decoration: none; font-weight: 600; cursor: pointer; font-size: 0.9rem; border: 1px solid #e2e6ea; }
-    .cat-link.active { background: var(--accent-green-dark); color: #fff; border-color: var(--accent-green-dark); }
+    .card-img-wrap { height: 185px; overflow: hidden; background: #e8e4de; position: relative; flex-shrink: 0; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .news-card:hover .card-img-wrap img { transform: scale(1.06); }
+    .card-topic-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(10,15,25,0.7); backdrop-filter: blur(4px);
+      color: #fff; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px;
+    }
 
-    #newsContainer { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding-bottom: 50px; }
+    .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .news-title {
+      font-family: 'Mukta', sans-serif;
+      font-weight: 700; font-size: 1.05rem;
+      color: var(--text); line-height: 1.45;
+      flex: 1;
+    }
+    .card-footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .card-date { font-size: 0.72rem; color: var(--muted); font-weight: 500; display: flex; align-items: center; gap: 5px; }
+    .card-date::before {
+      content: ''; width: 8px; height: 2px;
+      background: var(--green-deep); display: block;
+    }
+    .save-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 0.9rem; padding: 2px 4px;
+      transition: color 0.2s, transform 0.15s;
+    }
+    .save-btn:hover { transform: scale(1.2); color: var(--red); }
+    .save-btn.saved { color: var(--red); }
 
-    .news-card { background: var(--card-bg-light); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: 0.3s; border: 1px solid #edf2f7; display: flex; flex-direction: column; height: 100%; cursor: pointer; }
-    .news-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+    /* ── LIST-STYLE CARD (compact) ── */
+    .news-card.compact { flex-direction: row; height: 110px; }
+    .news-card.compact .card-img-wrap { width: 130px; height: 100%; flex-shrink: 0; border-radius: 0; }
+    .news-card.compact .card-body { padding: 12px 14px; }
+    .news-card.compact .news-title { font-size: 0.92rem; }
+
+    /* ── LOADER ── */
+    .loader-wrap {
+      grid-column: 1/-1; display: flex; justify-content: center;
+      align-items: center; padding: 80px 0;
+    }
+    .loader {
+      width: 44px; height: 44px;
+      border: 3px solid var(--border);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── READER OVERLAY ── */
+    #newsReader {
+      position: fixed; inset: 0;
+      z-index: 2000; display: none;
+      background: rgba(10,15,25,0.75);
+      backdrop-filter: blur(8px);
+    }
+    .reader-panel {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 100%; max-width: 720px;
+      background: #fff; overflow-y: auto;
+      box-shadow: -20px 0 60px rgba(0,0,0,0.2);
+      animation: slideIn 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     
-    .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; background: #eee; }
-    .news-card img { width: 100%; height: 100%; object-fit: cover; }
-    
-    .card-content { padding: 18px; flex-grow: 1; }
-    .news-title { font-family: 'Mukta', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.4; }
+    .reader-top-stripe { height: 4px; background: linear-gradient(90deg, var(--red) 0%, var(--green-deep) 100%); }
+    .reader-header {
+      position: sticky; top: 0; background: #fff;
+      padding: 14px 20px; display: flex; align-items: center;
+      justify-content: space-between; border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+    .reader-back {
+      display: flex; align-items: center; gap: 8px;
+      background: none; border: none; cursor: pointer;
+      font-size: 0.85rem; font-weight: 600; color: var(--text);
+      padding: 6px 14px; border-radius: 20px;
+      border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .reader-back:hover { background: var(--surface); border-color: var(--red); color: var(--red); }
+    .reader-content { padding: 32px; }
+    .reader-category {
+      display: inline-block; color: var(--red);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    #rTitle {
+      font-family: 'Mukta', sans-serif; font-weight: 800;
+      font-size: 1.75rem; line-height: 1.35; color: var(--text);
+      margin-bottom: 20px;
+    }
+    #rImg { width: 100%; border-radius: 10px; margin-bottom: 24px; display: block; }
+    #rBody {
+      font-family: 'Mukta', sans-serif; font-size: 1.1rem;
+      line-height: 1.9; color: #2d3e50;
+    }
+    .reader-divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--green-light));
+      border-radius: 2px; margin: 20px 0;
+    }
 
-    .card-footer { padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; background: #fcfcfc; border-top: 1px solid #f1f1f1; border-left: 4px solid var(--accent-green-light); }
-    
-    #newsReader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: none; backdrop-filter: blur(5px); }
-    .reader-window { background: #fff; width: 100%; max-width: 750px; height: 100%; margin: 0 auto; overflow-y: auto; position: relative; }
+    /* ── EMPTY / ERROR ── */
+    .empty-state {
+      grid-column: 1/-1; text-align: center; padding: 80px 20px;
+    }
+    .empty-state i { font-size: 2.5rem; color: var(--muted); margin-bottom: 16px; }
+    .empty-state p { color: var(--muted); font-size: 1rem; }
 
-    .dark-mode { background: var(--surface-dark); color: var(--text-main-dark); }
-    .dark-mode .app-header, .dark-mode .category-bar, .dark-mode .reader-window, .dark-mode .bg-white { background: var(--card-bg-dark) !important; border-color: #30363d; }
-    .dark-mode .news-card { background: var(--card-bg-dark); border-color: #30363d; }
-    .dark-mode .news-title { color: #f0f6fc; }
-    .dark-mode .cat-link { background: #30363d; color: #8b949e; border-color: #444; }
-    .dark-mode .card-footer { background: #161b22; border-color: #30363d; }
+    /* ── DARK MODE ── */
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: #c9d5e0;
+    }
+    .dark-mode .app-header,
+    .dark-mode .cat-nav,
+    .dark-mode .reader-panel,
+    .dark-mode .reader-header { background: var(--dark-card); border-color: var(--dark-border); }
+    .dark-mode .news-card { background: var(--dark-card); border-color: var(--dark-border); }
+    .dark-mode .news-title { color: #dde8f0; }
+    .dark-mode .card-footer-inner { border-color: var(--dark-border); }
+    .dark-mode .cat-link { color: #6b7d8e; }
+    .dark-mode .cat-link.active { color: #e07068; border-bottom-color: #e07068; }
+    .dark-mode .brand-name { color: #e07068; }
+    .dark-mode #rTitle { color: #dde8f0; }
+    .dark-mode #rBody { color: #a8bcc8; }
+    .dark-mode .reader-category { color: #e07068; }
+    .dark-mode .feed-divider-label { color: #c9d5e0; }
+    .dark-mode .header-date { color: #5a6878; }
+    .dark-mode .section-label { color: #e07068; }
+    .dark-mode .hero-category-tag { background: #c0524a; }
+    .dark-mode .icon-btn { color: #c9d5e0; border-color: var(--dark-border); }
+    .dark-mode .reader-back { color: #c9d5e0; border-color: var(--dark-border); }
+    .dark-mode .reader-back:hover { background: #1a2030; }
+    .dark-mode .card-date { color: #5a7088; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-side { flex-direction: row; }
+      .hero-side-item { min-height: 150px; }
+      #newsContainer { grid-template-columns: repeat(2, 1fr); }
+      .reader-panel { max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .header-date { display: none; }
+      #newsContainer { grid-template-columns: 1fr; }
+      .hero-title { font-size: 1.25rem; }
+      .hero-side { flex-direction: column; }
+    }
   </style>
 </head>
 <body onload="initApp()">
 
   <header class="app-header">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a href="#" class="brand-container" onclick="location.reload()">
-     <img src="images/icon.png" class="brand-logo" alt="Logo" onerror="this.style.display='none'" hidden>
-        <h1 class="brand-name">खबर बिराटनगर</h1>
+    <div class="header-stripe"></div>
+    <div class="header-inner">
+      <a href="#" class="brand-area" onclick="location.reload(); return false;">
+        <div class="brand-emblem"><span>ख</span></div>
+        <div class="brand-text">
+          <span class="brand-name">खबर बिराटनगर</span>
+          <span class="brand-sub">Khabar Biratnagar</span>
+        </div>
       </a>
-      <div class="d-flex align-items-center gap-2">
-        <button class="header-action-btn" onclick="renderSaved()"><i class="fas fa-heart"></i></button>
-        <button onclick="toggleDarkMode()" class="header-action-btn"><i id="darkModeIcon" class="fas fa-moon"></i></button>
+      <div class="header-date" id="headerDate"></div>
+      <div class="header-actions">
+        <button class="icon-btn" title="Saved" onclick="renderSaved()"><i class="fas fa-heart"></i></button>
+        <button class="icon-btn" onclick="toggleDarkMode()" title="Dark mode"><i id="darkModeIcon" class="fas fa-moon"></i></button>
       </div>
     </div>
   </header>
 
-  <nav class="category-bar">
-    <div class="container">
-        <div class="cat-link active" onclick="filterByTopic('All', this)">ताजा खबर</div>
-        <div class="cat-link" onclick="filterByTopic('Politics', this)">राजनीति</div>
-        <div class="cat-link" onclick="filterByTopic('Sports', this)">खेलकुद</div>
-        <div class="cat-link" onclick="filterByTopic('Tech', this)">प्रविधि</div>
-        <div class="cat-link" onclick="filterByTopic('Economy', this)">अर्थतन्त्र</div>
+  <div class="ticker-bar">
+    <div class="ticker-label">ताजा</div>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="tickerInner">
+        <span>समाचार लोड हुँदैछ...</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="cat-nav">
+    <div class="cat-nav-inner">
+      <div class="cat-link active" onclick="filterByTopic('All', this)">सबै खबर</div>
+      <div class="cat-link" onclick="filterByTopic('Politics', this)">राजनीति</div>
+      <div class="cat-link" onclick="filterByTopic('Sports', this)">खेलकुद</div>
+      <div class="cat-link" onclick="filterByTopic('Tech', this)">प्रविधि</div>
+      <div class="cat-link" onclick="filterByTopic('Economy', this)">अर्थतन्त्र</div>
     </div>
   </nav>
 
-  <main class="container">
-    <div id="newsContainer"></div>
+  <main class="main-wrap">
+    <section class="hero-section" id="heroSection" style="display:none">
+      <div class="section-label">शीर्ष समाचार</div>
+      <div class="hero-grid" id="heroGrid"></div>
+    </section>
+
+    <div class="feed-divider" id="feedDivider" style="display:none">
+      <div class="feed-divider-dot"></div>
+      <div class="feed-divider-label">ताजा खबर</div>
+      <div class="feed-divider-line"></div>
+    </div>
+
+    <div id="newsContainer">
+      <div class="loader-wrap"><div class="loader"></div></div>
+    </div>
   </main>
 
-  <div id="newsReader">
-    <div class="reader-window">
-        <div class="sticky-top bg-white p-3 d-flex align-items-center border-bottom justify-content-between" id="readerHeader">
-            <button class="btn btn-light rounded-pill px-3" onclick="closeReader()"><i class="fas fa-arrow-left me-1"></i> फर्कनुहोस्</button>
-            <button id="readerSaveBtn" class="btn btn-light rounded-circle" onclick="toggleSaveCurrent()"><i class="far fa-heart"></i></button>
-        </div>
-        <div class="p-4">
-            <h1 id="rTitle" class="fw-bold mb-4" style="font-family:'Mukta';"></h1>
-            <img id="rImg" class="w-100 rounded-3 mb-4" src="">
-            <div id="rBody" style="font-family:'Mukta'; line-height:1.8; font-size:1.2rem;"></div>
-        </div>
+  <!-- READER -->
+  <div id="newsReader" onclick="handleReaderBgClick(event)">
+    <div class="reader-panel" id="readerPanel">
+      <div class="reader-top-stripe"></div>
+      <div class="reader-header">
+        <button class="reader-back" onclick="closeReader()">
+          <i class="fas fa-arrow-left"></i> फर्कनुहोस्
+        </button>
+        <button id="readerSaveBtn" class="icon-btn" onclick="toggleSaveCurrent()">
+          <i class="far fa-heart"></i>
+        </button>
+      </div>
+      <div class="reader-content">
+        <div class="reader-category" id="rCategory"></div>
+        <h1 id="rTitle"></h1>
+        <div class="reader-divider"></div>
+        <img id="rImg" src="" alt="">
+        <div id="rBody"></div>
+      </div>
     </div>
   </div>
 
   <script>
-    // USE LOCAL PATH FOR FALLBACK
     const fallbackImage = "images/icon.png";
-    
     const feeds = [
       { url: "https://www.onlinekhabar.com/feed" },
       { url: "https://setopati.com/feed" },
@@ -125,133 +479,204 @@
       { url: "https://ekantipur.com/rss/news" },
       { url: "https://www.techpana.com/feed" }
     ];
+    let allNews = [], activeList = [], currentOpenItem = null;
 
-    let allNews = [];
-    let activeList = [];
-    let currentOpenItem = null;
+    // Set date
+    const now = new Date();
+    document.getElementById('headerDate').textContent = now.toLocaleDateString('ne-NP', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 
-    async function initApp() { 
-      if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
-      await loadNews(); 
+    async function initApp() {
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+      await loadNews();
     }
 
     async function loadNews() {
-      const container = document.getElementById('newsContainer');
-      container.innerHTML = '<div class="text-center w-100 p-5"><div class="spinner-border text-danger"></div></div>';
       try {
-        const results = await Promise.all(feeds.map(f => 
-            fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`)
-            .then(r => r.json()).then(data => (data.items || []).map(item => ({
-                ...item, topic: getTopic(item.title + (item.description || ''))
-            }))).catch(() => [])
+        const results = await Promise.all(feeds.map(f =>
+          fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`)
+          .then(r => r.json())
+          .then(data => (data.items || []).map(item => ({ ...item, topic: getTopic(item.title + (item.description || '')) })))
+          .catch(() => [])
         ));
-        allNews = results.flat().sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+        allNews = results.flat().sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
         activeList = allNews;
-        renderList(activeList);
-      } catch (e) { container.innerHTML = "समाचार लोड गर्न सकिएन।"; }
+        updateTicker(allNews.slice(0, 8));
+        renderHero(allNews.slice(0, 4));
+        renderList(allNews.slice(4));
+      } catch(e) {
+        document.getElementById('newsContainer').innerHTML = '<div class="empty-state"><i class="fas fa-satellite-dish"></i><p>समाचार लोड गर्न सकिएन।</p></div>';
+      }
     }
 
-    function cleanContent(html) {
-        let div = document.createElement("div");
-        div.innerHTML = html;
-        let text = div.textContent || div.innerText || "";
-        let lastStop = text.lastIndexOf("।");
-        return lastStop !== -1 ? text.substring(0, lastStop + 1) : text;
+    function updateTicker(items) {
+      const ti = document.getElementById('tickerInner');
+      const doubled = [...items, ...items];
+      ti.innerHTML = doubled.map(i => `<span>${i.title}</span>`).join('');
     }
+
+    function getImg(item) {
+      return item.thumbnail || item.enclosure?.link || (item.description?.match(/<img[^>]+src="([^">]+)"/)?.[1]) || fallbackImage;
+    }
+
+    function renderHero(items) {
+      if (!items.length) return;
+      const grid = document.getElementById('heroGrid');
+      const main = items[0];
+      const sides = items.slice(1, 4);
+      grid.innerHTML = `
+        <div class="hero-main" onclick="openItemByRef(0)">
+          <img src="${getImg(main)}" onerror="this.src='${fallbackImage}'" alt="">
+          <div class="hero-main-overlay">
+            <div class="hero-category-tag">${topicLabel(main.topic)}</div>
+            <div class="hero-title">${main.title}</div>
+            <div class="hero-meta">${new Date(main.pubDate).toLocaleDateString('ne-NP')}</div>
+          </div>
+        </div>
+        <div class="hero-side">
+          ${sides.map((s, i) => `
+            <div class="hero-side-item" onclick="openItemByRef(${i+1})">
+              <img src="${getImg(s)}" onerror="this.src='${fallbackImage}'" alt="">
+              <div class="hero-side-overlay">
+                <div class="hero-side-title">${s.title}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>`;
+      document.getElementById('heroSection').style.display = '';
+      document.getElementById('feedDivider').style.display = '';
+    }
+
+    function openItemByRef(index) { openItemFull(activeList[index]); }
 
     function renderList(list) {
       const container = document.getElementById('newsContainer');
       container.innerHTML = '';
       const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
-
+      if (!list.length) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>कुनै समाचार फेला परेन।</p></div>';
+        return;
+      }
       list.forEach((item, index) => {
         const isSaved = saved.some(s => s.link === item.link);
-        let img = item.thumbnail || item.enclosure?.link || (item.description?.match(/<img[^>]+src="([^">]+)"/)?.[1]) || fallbackImage;
-        
         const div = document.createElement('div');
         div.className = 'news-card';
         div.innerHTML = `
-            <div onclick="openItem(${index})">
-                <div class="card-img-wrapper"><img src="${img}" onerror="this.src='${fallbackImage}'" loading="lazy"></div>
-                <div class="card-content"><div class="news-title">${item.title}</div></div>
+          <div class="card-img-wrap" onclick="openItemFull(activeList[${allNews.indexOf(item)}])">
+            <img src="${getImg(item)}" onerror="this.src='${fallbackImage}'" loading="lazy" alt="">
+            <span class="card-topic-badge">${topicLabel(item.topic)}</span>
+          </div>
+          <div class="card-body" onclick="openItemFull(activeList[${allNews.indexOf(item)}])">
+            <div class="news-title">${item.title}</div>
+          </div>
+          <div style="padding:0 16px 14px">
+            <div class="card-footer-inner">
+              <span class="card-date">${new Date(item.pubDate).toLocaleDateString('ne-NP')}</span>
+              <button class="save-btn ${isSaved ? 'saved' : ''}" onclick="event.stopPropagation(); toggleSaveItem('${item.link}', this)">
+                <i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>
+              </button>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">${new Date(item.pubDate).toLocaleDateString('ne-NP')}</small>
-                <i class="${isSaved ? 'fas text-danger' : 'far'} fa-heart" onclick="toggleSaveItem(${index}, this)"></i>
-            </div>`;
+          </div>`;
         container.appendChild(div);
       });
     }
 
-    function openItem(index) {
-        const item = activeList[index];
-        currentOpenItem = item;
-        const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
-        const isSaved = saved.some(s => s.link === item.link);
-        
-        document.getElementById('rTitle').innerText = item.title;
-        document.getElementById('rBody').innerText = cleanContent(item.content || item.description);
-
-        const rImg = document.getElementById('rImg');
-        rImg.src = item.thumbnail || item.enclosure?.link || (item.description?.match(/<img[^>]+src="([^">]+)"/)?.[1]) || fallbackImage;
-        rImg.onerror = function() { this.src = fallbackImage; };
-
-        document.getElementById('readerSaveBtn').innerHTML = `<i class="${isSaved ? 'fas text-danger' : 'far'} fa-heart"></i>`;
-        document.getElementById('newsReader').style.display = 'block';
-        document.body.style.overflow = 'hidden';
+    function openItemFull(item) {
+      if (!item) return;
+      currentOpenItem = item;
+      const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
+      const isSaved = saved.some(s => s.link === item.link);
+      document.getElementById('rCategory').textContent = topicLabel(item.topic);
+      document.getElementById('rTitle').textContent = item.title;
+      document.getElementById('rBody').textContent = cleanContent(item.content || item.description || '');
+      const rImg = document.getElementById('rImg');
+      rImg.src = getImg(item);
+      rImg.onerror = () => rImg.src = fallbackImage;
+      document.getElementById('readerSaveBtn').innerHTML = `<i class="${isSaved ? 'fas text-danger' : 'far'} fa-heart"></i>`;
+      document.getElementById('newsReader').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      document.getElementById('readerPanel').scrollTop = 0;
     }
 
-    function toggleSaveItem(index, icon) {
-        event.stopPropagation();
-        const item = activeList[index];
-        let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
-        const idx = saved.findIndex(s => s.link === item.link);
-        if (idx > -1) { saved.splice(idx, 1); icon.className = 'far fa-heart'; }
-        else { saved.push(item); icon.className = 'fas text-danger fa-heart'; }
-        localStorage.setItem('savedNews', JSON.stringify(saved));
+    function handleReaderBgClick(e) { if (e.target === document.getElementById('newsReader')) closeReader(); }
+
+    function cleanContent(html) {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      const text = div.textContent || '';
+      const last = text.lastIndexOf('।');
+      return last !== -1 ? text.substring(0, last + 1) : text;
+    }
+
+    function toggleSaveItem(link, btn) {
+      let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
+      const idx = saved.findIndex(s => s.link === link);
+      if (idx > -1) { saved.splice(idx, 1); btn.className = 'save-btn'; btn.innerHTML = '<i class="far fa-heart"></i>'; }
+      else { const item = allNews.find(n => n.link === link); if (item) saved.push(item); btn.className = 'save-btn saved'; btn.innerHTML = '<i class="fas fa-heart"></i>'; }
+      localStorage.setItem('savedNews', JSON.stringify(saved));
     }
 
     function toggleSaveCurrent() {
-        let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
-        const idx = saved.findIndex(s => s.link === currentOpenItem.link);
-        if (idx > -1) saved.splice(idx, 1);
-        else saved.push(currentOpenItem);
-        localStorage.setItem('savedNews', JSON.stringify(saved));
-        renderList(activeList);
-        closeReader();
+      let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
+      const idx = saved.findIndex(s => s.link === currentOpenItem.link);
+      if (idx > -1) saved.splice(idx, 1); else saved.push(currentOpenItem);
+      localStorage.setItem('savedNews', JSON.stringify(saved));
+      document.getElementById('readerSaveBtn').innerHTML = `<i class="${idx > -1 ? 'far' : 'fas'} fa-heart"></i>`;
     }
 
-    function closeReader() { document.getElementById('newsReader').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeReader() {
+      const panel = document.getElementById('readerPanel');
+      panel.style.animation = 'slideOut 0.25s ease forwards';
+      setTimeout(() => { document.getElementById('newsReader').style.display = 'none'; panel.style.animation = ''; document.body.style.overflow = 'auto'; }, 240);
+    }
 
     function filterByTopic(topic, el) {
-        document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
-        if(el) el.classList.add('active');
-        activeList = topic === 'All' ? allNews : allNews.filter(n => n.topic === topic);
-        renderList(activeList);
-        window.scrollTo({top: 0, behavior: 'smooth'});
+      document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      activeList = topic === 'All' ? allNews : allNews.filter(n => n.topic === topic);
+      const skip = topic === 'All' ? 4 : 0;
+      if (topic === 'All') {
+        renderHero(allNews.slice(0, 4));
+        document.getElementById('heroSection').style.display = '';
+        document.getElementById('feedDivider').style.display = '';
+      } else {
+        document.getElementById('heroSection').style.display = 'none';
+        document.getElementById('feedDivider').style.display = 'none';
+      }
+      renderList(activeList.slice(skip));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function getTopic(t) {
-        t = t.toLowerCase();
-        if(t.includes('खेल')) return 'Sports';
-        if(t.includes('राजनीति')) return 'Politics';
-        if(t.includes('प्रविधि')) return 'Tech';
-        if(t.includes('अर्थ')) return 'Economy';
-        return 'General';
+      t = t.toLowerCase();
+      if (t.includes('खेल')) return 'Sports';
+      if (t.includes('राजनीति')) return 'Politics';
+      if (t.includes('प्रविधि') || t.includes('tech')) return 'Tech';
+      if (t.includes('अर्थ') || t.includes('economy')) return 'Economy';
+      return 'General';
+    }
+
+    function topicLabel(t) {
+      return { Sports:'खेलकुद', Politics:'राजनीति', Tech:'प्रविधि', Economy:'अर्थ', General:'सामान्य' }[t] || t;
     }
 
     function renderSaved() {
-        activeList = JSON.parse(localStorage.getItem('savedNews') || '[]');
-        renderList(activeList);
-        document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
+      const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
+      activeList = saved;
+      document.getElementById('heroSection').style.display = 'none';
+      document.getElementById('feedDivider').style.display = 'none';
+      document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
+      renderList(saved);
     }
 
     function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        document.getElementById('darkModeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        document.getElementById('readerHeader').className = isDark ? 'sticky-top p-3 d-flex align-items-center border-bottom justify-content-between bg-dark' : 'sticky-top p-3 d-flex align-items-center border-bottom justify-content-between bg-white';
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      document.getElementById('darkModeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     }
   </script>
+
+  <style>
+    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+  </style>
 </body>
 </html>
