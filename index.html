@@ -296,13 +296,16 @@
       backdrop-filter: blur(8px);
     }
     .reader-panel {
-      position: absolute; right: 0; top: 0; bottom: 0;
-      width: 100%; max-width: 720px;
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 95%; max-width: 720px;
+      max-height: 92vh;
       background: #fff; overflow-y: auto;
-      box-shadow: -20px 0 60px rgba(0,0,0,0.2);
+      border-radius: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
       animation: slideIn 0.35s cubic-bezier(0.22,1,0.36,1);
     }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes slideIn { from { transform: translate(-50%, -46%); opacity: 0; } to { transform: translate(-50%, -50%); opacity: 1; } }
     
     .reader-top-stripe { height: 4px; background: linear-gradient(90deg, var(--red) 0%, var(--green-deep) 100%); }
     .reader-header {
@@ -354,10 +357,7 @@
       background: var(--dark-bg);
       color: #c9d5e0;
     }
-    .dark-mode .app-header,
-    .dark-mode .cat-nav,
-    .dark-mode .reader-panel,
-    .dark-mode .reader-header { background: var(--dark-card); border-color: var(--dark-border); }
+    .dark-mode .reader-panel { background: var(--dark-card); }
     .dark-mode .news-card { background: var(--dark-card); border-color: var(--dark-border); }
     .dark-mode .news-title { color: #dde8f0; }
     .dark-mode .card-footer-inner { border-color: var(--dark-border); }
@@ -676,7 +676,7 @@
   </script>
 
   <style>
-    @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    @keyframes slideOut { from { transform: translate(-50%, -50%); opacity: 1; } to { transform: translate(-50%, -46%); opacity: 0; } }
   </style>
 </body>
 </html>
