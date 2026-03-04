@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/ayushacharya05/khabarbiratnagar/refs/heads/main/images/icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  
   <style>
     :root {
       --red: #a33e36;
@@ -28,7 +28,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
     html { scroll-behavior: smooth; }
 
     body {
@@ -147,7 +146,7 @@
       color: var(--muted); cursor: pointer; white-space: nowrap;
       border-bottom: 3px solid transparent; margin-bottom: -2px;
       transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.06em;
-      background: none; border-left: none; border-right: none; border-top: none;
+      background: none; border: none;
     }
     .cat-link:hover { color: var(--text); }
     .cat-link.active { color: var(--red); border-bottom-color: var(--red); }
@@ -167,7 +166,7 @@
       background: var(--green-light);
     }
     .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 2px; border-radius: 12px; overflow: hidden; }
-    .hero-main { position: relative; cursor: pointer; min-height: 420px; }
+    .hero-main { position: relative; cursor: pointer; min-height: 420px; background: #e8e4de; }
     .hero-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .hero-main:hover img { transform: scale(1.03); }
     .hero-main-overlay {
@@ -187,9 +186,9 @@
       color: #fff; line-height: 1.3;
     }
     .hero-meta { margin-top: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.6); }
-    
+        
     .hero-side { display: flex; flex-direction: column; gap: 2px; }
-    .hero-side-item { position: relative; cursor: pointer; flex: 1; min-height: 136px; overflow: hidden; }
+    .hero-side-item { position: relative; cursor: pointer; flex: 1; min-height: 136px; overflow: hidden; background: #e8e4de; }
     .hero-side-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
     .hero-side-item:hover img { transform: scale(1.05); }
     .hero-side-overlay {
@@ -202,18 +201,6 @@
       font-weight: 700; font-size: 0.9rem;
       color: #fff; line-height: 1.35;
     }
-
-    /* ── DIVIDER ── */
-    .feed-divider {
-      display: flex; align-items: center; gap: 16px;
-      margin: 36px 0 24px;
-    }
-    .feed-divider-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--navy); white-space: nowrap;
-    }
-    .feed-divider-line { flex: 1; height: 1px; background: var(--border); }
-    .feed-divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
 
     /* ── NEWS GRID ── */
     #newsContainer {
@@ -230,7 +217,7 @@
       cursor: pointer; transition: box-shadow 0.25s, transform 0.25s;
     }
     .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(26,50,75,0.12); }
-    
+        
     .card-img-wrap { height: 185px; overflow: hidden; background: #e8e4de; position: relative; flex-shrink: 0; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
     .news-card:hover .card-img-wrap img { transform: scale(1.06); }
@@ -267,12 +254,6 @@
     .save-btn:hover { transform: scale(1.2); color: var(--red); }
     .save-btn.saved { color: var(--red); }
 
-    /* ── LIST-STYLE CARD (compact) ── */
-    .news-card.compact { flex-direction: row; height: 110px; }
-    .news-card.compact .card-img-wrap { width: 130px; height: 100%; flex-shrink: 0; border-radius: 0; }
-    .news-card.compact .card-body { padding: 12px 14px; }
-    .news-card.compact .news-title { font-size: 0.92rem; }
-
     /* ── LOADER ── */
     .loader-wrap {
       grid-column: 1/-1; display: flex; justify-content: center;
@@ -305,7 +286,7 @@
       animation: slideIn 0.35s cubic-bezier(0.22,1,0.36,1);
     }
     @keyframes slideIn { from { transform: translate(-50%, -46%); opacity: 0; } to { transform: translate(-50%, -50%); opacity: 1; } }
-    
+        
     .reader-top-stripe { height: 4px; background: linear-gradient(90deg, var(--red) 0%, var(--green-deep) 100%); }
     .reader-header {
       position: sticky; top: 0; background: #fff;
@@ -333,60 +314,30 @@
       font-size: 1.75rem; line-height: 1.35; color: var(--text);
       margin-bottom: 20px;
     }
-    #rImg { width: 100%; border-radius: 10px; margin-bottom: 24px; display: block; }
+    #rImg { width: 100%; border-radius: 10px; margin-bottom: 24px; display: block; background: #eee; }
     #rBody {
       font-family: 'Mukta', sans-serif; font-size: 1.1rem;
       line-height: 1.9; color: #2d3e50;
     }
-    .reader-divider {
-      width: 48px; height: 3px;
-      background: linear-gradient(90deg, var(--red), var(--green-light));
-      border-radius: 2px; margin: 20px 0;
-    }
-
-    /* ── EMPTY / ERROR ── */
-    .empty-state {
-      grid-column: 1/-1; text-align: center; padding: 80px 20px;
-    }
-    .empty-state i { font-size: 2.5rem; color: var(--muted); margin-bottom: 16px; }
-    .empty-state p { color: var(--muted); font-size: 1rem; }
 
     /* ── DARK MODE ── */
-    body.dark-mode {
-      background: var(--dark-bg);
-      color: #c9d5e0;
-    }
+    body.dark-mode { background: var(--dark-bg); color: #c9d5e0; }
+    .dark-mode .app-header, .dark-mode .cat-nav, .dark-mode .reader-header { background: var(--dark-card); border-color: var(--dark-border); }
     .dark-mode .reader-panel { background: var(--dark-card); }
     .dark-mode .news-card { background: var(--dark-card); border-color: var(--dark-border); }
-    .dark-mode .news-title { color: #dde8f0; }
-    .dark-mode .card-footer-inner { border-color: var(--dark-border); }
-    .dark-mode .cat-link { color: #6b7d8e; }
-    .dark-mode .cat-link.active { color: #e07068; border-bottom-color: #e07068; }
-    .dark-mode .brand-name { color: #e07068; }
-    .dark-mode #rTitle { color: #dde8f0; }
+    .dark-mode .news-title, .dark-mode #rTitle { color: #dde8f0; }
     .dark-mode #rBody { color: #a8bcc8; }
-    .dark-mode .reader-category { color: #e07068; }
-    .dark-mode .feed-divider-label { color: #c9d5e0; }
-    .dark-mode .header-date { color: #5a6878; }
-    .dark-mode .section-label { color: #e07068; }
-    .dark-mode .hero-category-tag { background: #c0524a; }
-    .dark-mode .icon-btn { color: #c9d5e0; border-color: var(--dark-border); }
-    .dark-mode .reader-back { color: #c9d5e0; border-color: var(--dark-border); }
-    .dark-mode .reader-back:hover { background: #1a2030; }
-    .dark-mode .card-date { color: #5a7088; }
+    .dark-mode .icon-btn, .dark-mode .reader-back { color: #c9d5e0; border-color: var(--dark-border); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
       .hero-side { flex-direction: row; }
-      .hero-side-item { min-height: 150px; }
       #newsContainer { grid-template-columns: repeat(2, 1fr); }
-      .reader-panel { max-width: 100%; }
     }
     @media (max-width: 600px) {
       .header-date { display: none; }
       #newsContainer { grid-template-columns: 1fr; }
-      .hero-title { font-size: 1.25rem; }
       .hero-side { flex-direction: column; }
     }
   </style>
@@ -422,11 +373,11 @@
 
   <nav class="cat-nav">
     <div class="cat-nav-inner">
-      <div class="cat-link active" onclick="filterByTopic('All', this)">सबै खबर</div>
-      <div class="cat-link" onclick="filterByTopic('Politics', this)">राजनीति</div>
-      <div class="cat-link" onclick="filterByTopic('Sports', this)">खेलकुद</div>
-      <div class="cat-link" onclick="filterByTopic('Tech', this)">प्रविधि</div>
-      <div class="cat-link" onclick="filterByTopic('Economy', this)">अर्थतन्त्र</div>
+      <button class="cat-link active" onclick="filterByTopic('All', this)">सबै खबर</button>
+      <button class="cat-link" onclick="filterByTopic('Politics', this)">राजनीति</button>
+      <button class="cat-link" onclick="filterByTopic('Sports', this)">खेलकुद</button>
+      <button class="cat-link" onclick="filterByTopic('Tech', this)">प्रविधि</button>
+      <button class="cat-link" onclick="filterByTopic('Economy', this)">अर्थतन्त्र</button>
     </div>
   </nav>
 
@@ -436,18 +387,11 @@
       <div class="hero-grid" id="heroGrid"></div>
     </section>
 
-    <div class="feed-divider" id="feedDivider" style="display:none">
-      <div class="feed-divider-dot"></div>
-      <div class="feed-divider-label">ताजा खबर</div>
-      <div class="feed-divider-line"></div>
-    </div>
-
     <div id="newsContainer">
       <div class="loader-wrap"><div class="loader"></div></div>
     </div>
   </main>
 
-  <!-- READER -->
   <div id="newsReader" onclick="handleReaderBgClick(event)">
     <div class="reader-panel" id="readerPanel">
       <div class="reader-top-stripe"></div>
@@ -462,7 +406,6 @@
       <div class="reader-content">
         <div class="reader-category" id="rCategory"></div>
         <h1 id="rTitle"></h1>
-        <div class="reader-divider"></div>
         <img id="rImg" src="" alt="">
         <div id="rBody"></div>
       </div>
@@ -470,6 +413,7 @@
   </div>
 
   <script>
+    // Configuration
     const fallbackImage = "https://raw.githubusercontent.com/ayushacharya05/khabarbiratnagar/refs/heads/main/images/icon.png";
     const feeds = [
       { url: "https://www.onlinekhabar.com/feed" },
@@ -480,13 +424,28 @@
     ];
     let allNews = [], activeList = [], currentOpenItem = null;
 
-    // Set date
-    const now = new Date();
-    document.getElementById('headerDate').textContent = now.toLocaleDateString('ne-NP', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
+    // Initialize App
     async function initApp() {
-      if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-      await loadNews();
+        // Set date
+        const now = new Date();
+        document.getElementById('headerDate').textContent = now.toLocaleDateString('ne-NP', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+        
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+        await loadNews();
+    }
+
+    // Improved Image Scraper
+    function getImg(item) {
+        // 1. Direct thumbnail
+        if (item.thumbnail && typeof item.thumbnail === 'string' && item.thumbnail.includes('http')) return item.thumbnail;
+        
+        // 2. Enclosure (common for OnlineKhabar)
+        if (item.enclosure && item.enclosure.link) return item.enclosure.link;
+        
+        // 3. Regex for embedded images (common for Ekantipur/Setopati)
+        const content = (item.description || '') + (item.content || '');
+        const match = content.match(/<img[^>]+src="([^">]+)"/);
+        return (match && match[1]) ? match[1] : fallbackImage;
     }
 
     async function loadNews() {
@@ -494,7 +453,11 @@
         const results = await Promise.all(feeds.map(f =>
           fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`)
           .then(r => r.json())
-          .then(data => (data.items || []).map(item => ({ ...item, topic: getTopic(item.title + (item.description || '')) })))
+          .then(data => (data.items || []).map(item => ({ 
+              ...item, 
+              topic: getTopic(item.title + (item.description || '')),
+              image: getImg(item) // Pre-calculate image
+          })))
           .catch(() => [])
         ));
         allNews = results.flat().sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
@@ -509,13 +472,7 @@
 
     function updateTicker(items) {
       const ti = document.getElementById('tickerInner');
-      const doubled = [...items, ...items];
-      ti.innerHTML = doubled.map(i => `<span>${i.title}</span>`).join('');
-    }
-
-    function getImg(item) {
-      if (item.thumbnail && typeof item.thumbnail === 'string' && item.thumbnail.startsWith('http')) return item.thumbnail;
-      return null;
+      ti.innerHTML = [...items, ...items].map(i => `<span>${i.title}</span>`).join('');
     }
 
     function renderHero(items) {
@@ -524,8 +481,8 @@
       const main = items[0];
       const sides = items.slice(1, 4);
       grid.innerHTML = `
-        <div class="hero-main" onclick="openItemByRef(0)">
-          ${getImg(main) ? `<img src="${getImg(main)}" alt="">` : ''}
+        <div class="hero-main" onclick="openItemFull(activeList[0])">
+          <img src="${main.image}" onerror="this.src='${fallbackImage}'" alt="">
           <div class="hero-main-overlay">
             <div class="hero-category-tag">${topicLabel(main.topic)}</div>
             <div class="hero-title">${main.title}</div>
@@ -534,8 +491,8 @@
         </div>
         <div class="hero-side">
           ${sides.map((s, i) => `
-            <div class="hero-side-item" onclick="openItemByRef(${i+1})">
-              ${getImg(s) ? `<img src="${getImg(s)}" alt="">` : ''}
+            <div class="hero-side-item" onclick="openItemFull(activeList[${i+1}])">
+              <img src="${s.image}" onerror="this.src='${fallbackImage}'" alt="">
               <div class="hero-side-overlay">
                 <div class="hero-side-title">${s.title}</div>
               </div>
@@ -543,10 +500,7 @@
           `).join('')}
         </div>`;
       document.getElementById('heroSection').style.display = '';
-      document.getElementById('feedDivider').style.display = '';
     }
-
-    function openItemByRef(index) { openItemFull(activeList[index]); }
 
     function renderList(list) {
       const container = document.getElementById('newsContainer');
@@ -556,22 +510,22 @@
         container.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><p>कुनै समाचार फेला परेन।</p></div>';
         return;
       }
-      list.forEach((item, index) => {
+      list.forEach((item) => {
         const isSaved = saved.some(s => s.link === item.link);
         const div = document.createElement('div');
         div.className = 'news-card';
         div.innerHTML = `
-          ${getImg(item) ? `<div class="card-img-wrap" onclick="openItemFull(activeList[${allNews.indexOf(item)}])">
-            <img src="${getImg(item)}" loading="lazy" alt="">
+          <div class="card-img-wrap" onclick="openItemFullByLink('${item.link}')">
+            <img src="${item.image}" loading="lazy" onerror="this.src='${fallbackImage}'" alt="">
             <span class="card-topic-badge">${topicLabel(item.topic)}</span>
-          </div>` : ''}
-          <div class="card-body" onclick="openItemFull(activeList[${allNews.indexOf(item)}])">
+          </div>
+          <div class="card-body" onclick="openItemFullByLink('${item.link}')">
             <div class="news-title">${item.title}</div>
           </div>
           <div style="padding:0 16px 14px">
             <div class="card-footer-inner">
               <span class="card-date">${new Date(item.pubDate).toLocaleDateString('ne-NP')}</span>
-              <button class="save-btn ${isSaved ? 'saved' : ''}" onclick="event.stopPropagation(); toggleSaveItem('${item.link}', this)">
+              <button class="save-btn ${isSaved ? 'saved' : ''}" onclick="toggleSaveItem('${item.link}', this)">
                 <i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>
               </button>
             </div>
@@ -580,90 +534,96 @@
       });
     }
 
+    function openItemFullByLink(link) {
+        const item = allNews.find(n => n.link === link) || activeList.find(n => n.link === link);
+        openItemFull(item);
+    }
+
     function openItemFull(item) {
       if (!item) return;
       currentOpenItem = item;
       const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
       const isSaved = saved.some(s => s.link === item.link);
+      
       document.getElementById('rCategory').textContent = topicLabel(item.topic);
       document.getElementById('rTitle').textContent = item.title;
-      document.getElementById('rBody').textContent = cleanContent(item.content || item.description || '');
+      document.getElementById('rBody').innerHTML = item.content || item.description || '';
+      
       const rImg = document.getElementById('rImg');
-      rImg.src = getImg(item);
+      rImg.src = item.image;
       rImg.onerror = () => rImg.src = fallbackImage;
-      document.getElementById('readerSaveBtn').innerHTML = `<i class="${isSaved ? 'fas text-danger' : 'far'} fa-heart"></i>`;
+      
+      document.getElementById('readerSaveBtn').innerHTML = `<i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>`;
       document.getElementById('newsReader').style.display = 'block';
       document.body.style.overflow = 'hidden';
       document.getElementById('readerPanel').scrollTop = 0;
     }
 
-    function handleReaderBgClick(e) { if (e.target === document.getElementById('newsReader')) closeReader(); }
-
-    function cleanContent(html) {
-      const div = document.createElement('div');
-      div.innerHTML = html;
-      const text = div.textContent || '';
-      const last = text.lastIndexOf('।');
-      return last !== -1 ? text.substring(0, last + 1) : text;
+    function closeReader() {
+      document.getElementById('newsReader').style.display = 'none';
+      document.body.style.overflow = 'auto';
     }
 
+    function handleReaderBgClick(e) { if (e.target.id === 'newsReader') closeReader(); }
+
     function toggleSaveItem(link, btn) {
+      event.stopPropagation();
       let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
       const idx = saved.findIndex(s => s.link === link);
-      if (idx > -1) { saved.splice(idx, 1); btn.className = 'save-btn'; btn.innerHTML = '<i class="far fa-heart"></i>'; }
-      else { const item = allNews.find(n => n.link === link); if (item) saved.push(item); btn.className = 'save-btn saved'; btn.innerHTML = '<i class="fas fa-heart"></i>'; }
+      if (idx > -1) { 
+          saved.splice(idx, 1); 
+          btn.classList.remove('saved');
+          btn.innerHTML = '<i class="far fa-heart"></i>'; 
+      } else { 
+          const item = allNews.find(n => n.link === link); 
+          if (item) saved.push(item); 
+          btn.classList.add('saved');
+          btn.innerHTML = '<i class="fas fa-heart"></i>'; 
+      }
       localStorage.setItem('savedNews', JSON.stringify(saved));
     }
 
     function toggleSaveCurrent() {
-      let saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
-      const idx = saved.findIndex(s => s.link === currentOpenItem.link);
-      if (idx > -1) saved.splice(idx, 1); else saved.push(currentOpenItem);
-      localStorage.setItem('savedNews', JSON.stringify(saved));
-      document.getElementById('readerSaveBtn').innerHTML = `<i class="${idx > -1 ? 'far' : 'fas'} fa-heart"></i>`;
-    }
-
-    function closeReader() {
-      const panel = document.getElementById('readerPanel');
-      panel.style.animation = 'slideOut 0.25s ease forwards';
-      setTimeout(() => { document.getElementById('newsReader').style.display = 'none'; panel.style.animation = ''; document.body.style.overflow = 'auto'; }, 240);
+      const btn = document.querySelector(`.save-btn[onclick*="${currentOpenItem.link}"]`);
+      toggleSaveItem(currentOpenItem.link, btn || document.createElement('button'));
+      const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
+      const isSaved = saved.some(s => s.link === currentOpenItem.link);
+      document.getElementById('readerSaveBtn').innerHTML = `<i class="${isSaved ? 'fas' : 'far'} fa-heart"></i>`;
     }
 
     function filterByTopic(topic, el) {
       document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
       if (el) el.classList.add('active');
       activeList = topic === 'All' ? allNews : allNews.filter(n => n.topic === topic);
-      const skip = topic === 'All' ? 4 : 0;
+      
       if (topic === 'All') {
         renderHero(allNews.slice(0, 4));
         document.getElementById('heroSection').style.display = '';
-        document.getElementById('feedDivider').style.display = '';
+        renderList(activeList.slice(4));
       } else {
         document.getElementById('heroSection').style.display = 'none';
-        document.getElementById('feedDivider').style.display = 'none';
+        renderList(activeList);
       }
-      renderList(activeList.slice(skip));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function getTopic(t) {
       t = t.toLowerCase();
-      if (t.includes('खेल')) return 'Sports';
-      if (t.includes('राजनीति')) return 'Politics';
-      if (t.includes('प्रविधि') || t.includes('tech')) return 'Tech';
-      if (t.includes('अर्थ') || t.includes('economy')) return 'Economy';
+      if (t.includes('खेल') || t.includes('cricket') || t.includes('football')) return 'Sports';
+      if (t.includes('राजनीति') || t.includes('election') || t.includes('सरकार')) return 'Politics';
+      if (t.includes('प्रविधि') || t.includes('tech') || t.includes('gadget')) return 'Tech';
+      if (t.includes('अर्थ') || t.includes('economy') || t.includes('बजेट')) return 'Economy';
       return 'General';
     }
 
     function topicLabel(t) {
-      return { Sports:'खेलकुद', Politics:'राजनीति', Tech:'प्रविधि', Economy:'अर्थ', General:'सामान्य' }[t] || t;
+      return { Sports:'खेलकुद', Politics:'राजनीति', Tech:'प्रविधि', Economy:'अर्थतन्त्र', General:'सामान्य' }[t] || t;
     }
 
     function renderSaved() {
       const saved = JSON.parse(localStorage.getItem('savedNews') || '[]');
       activeList = saved;
       document.getElementById('heroSection').style.display = 'none';
-      document.getElementById('feedDivider').style.display = 'none';
       document.querySelectorAll('.cat-link').forEach(c => c.classList.remove('active'));
       renderList(saved);
     }
@@ -674,9 +634,5 @@
       document.getElementById('darkModeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     }
   </script>
-
-  <style>
-    @keyframes slideOut { from { transform: translate(-50%, -50%); opacity: 1; } to { transform: translate(-50%, -46%); opacity: 0; } }
-  </style>
 </body>
 </html>
