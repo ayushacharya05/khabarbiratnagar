@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -492,7 +493,7 @@
     async function loadNews() {
       try {
         const results = await Promise.all(feeds.map(f =>
-          fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}&api_key=&count=20&order_dir=desc`)
+          fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`)
           .then(r => r.json())
           .then(data => (data.items || []).map(item => ({ ...item, topic: getTopic(item.title + (item.description || '')) })))
           .catch(() => [])
@@ -514,11 +515,16 @@
     }
 
     function getImg(item) {
-      if (item.thumbnail && item.thumbnail.trim() && item.thumbnail.startsWith('http')) return item.thumbnail;
-      if (item.enclosure?.link && item.enclosure.link.match(/\.(jpg|jpeg|png|webp|gif)/i)) return item.enclosure.link;
+      // rss2json thumbnail
+      if (item.thumbnail && typeof item.thumbnail === 'string' && item.thumbnail.startsWith('http')) return item.thumbnail;
+      // enclosure (rss2json)
+      if (item.enclosure?.link && /\.(jpg|jpeg|png|webp|gif)/i.test(item.enclosure.link)) return item.enclosure.link;
+      // enclosure (manual parse)
+      if (item.enclosure?.url && /\.(jpg|jpeg|png|webp|gif)/i.test(item.enclosure.url)) return item.enclosure.url;
+      // dig into HTML
       const html = item.content || item.description || '';
-      const m1 = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-      if (m1?.[1]) return m1[1];
+      const m1 = html.match(/<img[^>]+src=["']([^"' >]+)["' ]/i);
+      if (m1?.[1] && m1[1].startsWith('http')) return m1[1];
       const m2 = html.match(/https?:\/\/[^\s"'<>]+\.(?:jpg|jpeg|png|webp|gif)/i);
       if (m2?.[0]) return m2[0];
       return fallbackImage;
